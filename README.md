@@ -10,7 +10,16 @@ A static website prototype for searching and viewing Mumbai building-safety reco
 - `data/coords.js` — coordinate data used by the map. It is empty until coordinates are generated.
 - `scripts/geocode.mjs` — optional helper to look up approximate/address coordinates for the C1 list.
 
-The prototype may show approximate ward-area locations where verified building-level coordinates are unavailable. A map marker must not be treated as an exact building pin unless its coordinate precision is verified. Absence from the C1 list is not a safety certificate.
+The kiosk only displays building pins when a coordinate entry exists for that building and its precision flag is exactly `verified`. The current `data/coords.js` is empty, so the map displays no building pins. The geocoding helper produces candidate matches (building/street level); those are not automatically considered verified. Manually inspect and verify each coordinate before changing its precision flag to `verified`. Absence from the C1 list is not a safety certificate.
+
+## Current prototype limitations
+
+- The loaded BMC C1 source contains 141 building records dated 30 April 2026.
+- No verified C2A/C2B/C3 building records, PIN codes, individual notices, or building-specific history are currently loaded.
+- Building verification requests and request tracking are local to the current browser tab session. They are not sent to BMC and are not persisted to a shared database.
+- SMS actions open a prefilled draft in the device's messaging app; the prototype cannot confirm sending or delivery.
+- Selected document files are not uploaded or transmitted.
+- A real public verification and tracking service requires a backend/API, a persistent database, an authorised BMC integration or staffed request workflow, and an SMS provider.
 
 ## Optional coordinate generation
 
