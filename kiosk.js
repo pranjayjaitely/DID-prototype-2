@@ -195,7 +195,7 @@ function setupKeyboard(){
  document.addEventListener("focusin",e=>{if(e.target.matches("[data-vk]")){activeInput=e.target;draw();panel.classList.remove("hidden");}});
 }
 function init(){
- $(".language-option").forEach(b=>b.addEventListener("click",()=>chooseLanguage(b.dataset.language)));
+ $$(".language-option").forEach(b=>b.addEventListener("click",()=>chooseLanguage(b.dataset.language)));
  const en=$(".language-option[data-language=en]");if(en)en.setAttribute("aria-pressed","true");
  renderCategories();renderFilters();renderBrowse();applyLanguage();setupKeyboard();
  $("#continueLanguage").onclick=()=>{main();};
