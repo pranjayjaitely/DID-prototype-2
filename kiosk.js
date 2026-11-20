@@ -133,11 +133,15 @@ function openVerify(){
 }
 function reviewForm(){
  const f=$("#verifyForm"),v=Object.fromEntries(new FormData(f).entries()),phone=String(v.phone||"").replace(/\D/g,"");
- if(!v.building?.trim()||!v.address?.trim()||!v.applicant?.trim()||!v.reason||!/^[6-9]\d{9}$/.test(phone)){$("#formError").textContent=t("required")+" "+t("validPhone");return;}
+ if(!v.building?.trim()||!v.address?.trim()||!v.applicant?.trim()||!v.reason||!/^[6-9]\d{9}$/.test(phone)||(v.email?.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()))){$("#formError").textContent=t("required")+" "+t("validPhone");return;}
  reviewed={building:v.building,address:v.address,ward:v.ward,applicant:v.applicant,phone,email:v.email,reason:v.reason,details:v.details,files:Array.from($("#requestFiles").files).map(x=>x.name)};
  const lines=Object.entries(reviewed).map(([k,val])=>'<div class="info-cell"><small>'+esc(k)+'</small><strong>'+esc(Array.isArray(val)?val.join(", "):val)+'</strong></div>').join("");
  $("#requestFormWrap").innerHTML='<section class="surface form-card"><h2>'+esc(t("review"))+'</h2><div class="info-grid">'+lines+'</div><div class="warning-note" style="margin-top:16px">'+esc(t("localWarning"))+'</div><div class="form-actions"><button class="btn btn-secondary" id="editReq">'+esc(t("edit"))+'</button><button class="btn btn-primary" id="createReq">'+esc(t("confirm"))+'</button></div></section>';
- $("#editReq").onclick=openVerify;$("#createReq").onclick=createRequest;
+ $("#editReq").onclick=()=>{
+  openVerify();
+  const fields={building:reviewed.building,address:reviewed.address,ward:reviewed.ward,applicant:reviewed.applicant,phone:reviewed.phone,email:reviewed.email,reason:reviewed.reason,details:reviewed.details};
+  Object.entries(fields).forEach(([name,value])=>{const field=$("#verifyForm").elements[name];if(field)field.value=value||"";});
+ };$("#createReq").onclick=createRequest;
 }
 function createRequest(){
  const id="BMCV-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,8).toUpperCase(),now=new Date().toISOString();
@@ -187,6 +191,7 @@ function setupKeyboard(){
  document.addEventListener("focusin",e=>{if(e.target.matches("[data-vk]")){activeInput=e.target;draw();panel.classList.remove("hidden");}});
 }
 function init(){
+ $(".language-option").forEach(b=>b.addEventListener("click",()=>chooseLanguage(b.dataset.language)));
  const en=$(".language-option[data-language=en]");if(en)en.setAttribute("aria-pressed","true");
  renderCategories();renderFilters();renderBrowse();applyLanguage();setupKeyboard();
  $("#continueLanguage").onclick=()=>{main();};
