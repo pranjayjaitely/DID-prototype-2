@@ -74,7 +74,7 @@
           <label class="search-label" for="buildingSearch" data-i18n="searchLabel">Building name, address or PIN code</label>
           <div class="search-row">
             <div class="search-input-wrap">
-              <input id="buildingSearch" class="search-input" type="text" autocomplete="off" data-vk="alpha" data-i18n-placeholder="searchPlaceholder" placeholder="Enter building name, address or PIN">
+              <input id="buildingSearch" class="search-input" type="text" autocomplete="off" data-vk="alpha" data-i18n-placeholder="placeholder" placeholder="Enter building name, address or PIN">
               <button id="startVoice" class="mic-btn" type="button" aria-label="Start voice search" title="Voice search">🎙</button>
             </div>
             <button id="searchButton" class="btn btn-primary" type="button" data-i18n="search">Search</button>
@@ -87,7 +87,7 @@
           <p class="search-subline" data-i18n="voiceHint">Voice input uses your selected language. You can edit the recognised text before searching.</p>
           <div id="searchFeedback" class="inline-status" role="status" aria-live="polite"></div>
           <div id="notFoundCard" class="error-card hidden">
-            <h3 data-i18n="notFoundTitle">No matching building record found</h3>
+            <h3 data-i18n="notFound">No matching building record found</h3>
             <p data-i18n="notFoundCopy">This address did not match a record in the loaded list. This is not a safety assessment.</p>
             <div class="error-actions">
               <button class="btn btn-secondary btn-small" type="button" data-action="searchAgain" data-i18n="searchAgain">Search Again</button>
@@ -163,7 +163,7 @@
 </section>
 
 <section id="trackingScreen" class="screen hidden">
-  <header class="topbar"><div class="topbar-inner"><a class="brand" href="#" data-action="home"><span class="brand-mark">⌂</span><span class="brand-name" data-i18n="appName">BMC Housing Safety</span></a><span class="top-meta" data-i18n="requestTracking">Request Tracking</span></div></header>
+  <header class="topbar"><div class="topbar-inner"><a class="brand" href="#" data-action="home"><span class="brand-mark">⌂</span><span class="brand-name" data-i18n="appName">BMC Housing Safety</span></a><span class="top-meta" data-i18n="tracking">Request Tracking</span></div></header>
   <main class="app-shell subpage">
     <div class="back-row"><button class="btn btn-quiet btn-small" type="button" data-action="backToPrevious">← <span data-i18n="back">Back</span></button></div>
     <div class="page-head"><p class="eyebrow" data-i18n="citizenService">CITIZEN SERVICE</p><h1 data-i18n="trackRequestHeading">Track an Existing Request</h1><p class="lead" data-i18n="trackingDisclaimer">Only locally saved prototype requests created in this same browser session can be found here. No BMC status is retrieved.</p></div>
